@@ -1,18 +1,17 @@
 <launch>
   <arg name="left_id" default="0"/>
   <arg name="right_id" default="1"/>
+
   <node name="forces_node_left" pkg="cfs_sensor" type="cfs_node"  output="screen">
     <param name="cfs_default_device_name" value="/dev/ttyACM$(arg left_id)"/>
     <param name="cfs_sensor_pub_name" value="/cfs/data/left/"/>
     <param name="cfs_sensor_calib_srv_name" value="/cfs/sensor_calib/left"/>
   </node>
 
-  <group if="$(eval arg('left_id') - arg('right_id') != 0)">
-    <node name="forces_node_right" pkg="cfs_sensor" type="cfs_node"  output="screen">
-      <param name="cfs_default_device_name" value="/dev/ttyACM$(arg right_id)"/>
+  <node name="forces_node_right" pkg="cfs_sensor" type="cfs_node"  output="screen">
+    <param name="cfs_default_device_name" value="/dev/ttyACM$(arg right_id)"/>
     <param name="cfs_sensor_pub_name" value="/cfs/data/right/"/>
     <param name="cfs_sensor_calib_srv_name" value="/cfs/sensor_calib/right"/>
-    </node>
-  </group>
+  </node>
 
 </launch>
